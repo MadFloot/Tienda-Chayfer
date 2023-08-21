@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+    </head>
+    <body>
+        <section th:fragment="listadoBebes" id="productos">
+            <section th:fragment="listadoBebes" id="productos"
+
+                     <div class="col-md-6">
+                    <a href="bebes.html" class="btn btn-white">Bebes</a>
+                    <a href="HombresCatalogo.html" class="btn btn-white">Hombres</a>
+                    <a href="MujeresCatalogo.html" class="btn btn-white">Mujeres</a>
+                    <a href="PerfumesCatalogo.html" class="btn btn-white">Perfumes</a>
+                    <div style="text-align: center; position: relative;">
+                        <img id="mainImage" src="https://img2.wallspic.com/crops/1/8/6/3/33681/33681-tejer_cap-1920x1080.jpg" alt="Bebes" width="3500" style="max-width: 200%; margin-bottom: 20px;" />
+
+                        <div style="position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%);">
+                            <!-- Flecha izquierda -->
+                            <button type="button" class="btn btn-secondary" style="position: absolute; top: 50%; left: 0; transform: translateY(-50%);" onclick="changeImage('prev')">&#8249;</button>
+                        </div>
+
+                        <div style="position: absolute; top: 50%; right: -100%; transform: translate(50%, -50%);">
+                            <!-- Flecha derecha -->
+                            <button type="button" class="btn btn-secondary" style="position: absolute; top: 50%; right: -100%; transform: translateY(-50%);" onclick="changeImage('next')">&#8250;</button>
+                        </div>
+
+
+                    </div>
+
+                    <script>
+                        const images = [
+                            "https://img2.wallspic.com/crops/1/8/6/3/33681/33681-tejer_cap-1920x1080.jpg",
+                            "https://c.wallhere.com/photos/09/d1/G_Eazy_rap_musician_monochrome_men-1213785.jpg!d",
+                            "https://c.wallhere.com/photos/e8/88/Emma_Watson_monochrome_actress_women_model-244653.jpg!d",
+                            "https://hips.hearstapps.com/hmg-prod/images/disen-o-sin-ti-tulo-1671697996.png"
+                                    // En esta parque se pueden agregar mas imagenes a ruleta 
+
+                        ];
+
+                        let currentImageIndex = 0;
+                        const mainImage = document.getElementById("mainImage");
+
+                        function changeImage(direction) {
+                            if (direction === 'prev') {
+                                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                            } else if (direction === 'next') {
+                                currentImageIndex = (currentImageIndex + 1) % images.length;
+                            }
+                            mainImage.src = images[currentImageIndex];
+                        }
+
+                        function autoChangeImage() {
+                            changeImage('next');
+                        }
+
+                        // Cambia la imagen automáticamente cada 5 segundos (5000 ms)
+                        setInterval(autoChangeImage, 5000);
+                    </script> 
+
+
+
+                    <div th:if="${productos == null or productos.empty}">
+                        [[#{carrito.no_mostrar}]]
+                    </div>
+                </div>
+
+
+                </body>
+                </html>

@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.image-container {
+    text-align: center;
+    position: relative;
+}
+
+.image-container img {
+    width: 20%; /* Ajusta el ancho de la imagen según tus necesidades */
+    height: auto;
+}
+
+.btn-container {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btn {
+    padding: 10px 20px;
+    cursor: pointer;
+}

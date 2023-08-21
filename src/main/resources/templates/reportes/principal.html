@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Chayfer</title>        
+    </head>
+
+    <body>
+        <header th:replace="~{layout/plantilla :: header}" />
+
+        <div class="container my-4">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <h4 class="mb-0">Reporte de Usuarios</h4>
+                        </div>
+                        <div class="card-body text-center">
+                            <a th:href="@{/reportes/usuarios?tipo=vPdf}" class="btn btn-custom btn-dark">
+                                <i class="fas fa-eye"></i> Ver PDF
+                            </a>
+                            <a th:href="@{/reportes/usuarios?tipo=Pdf}" class="btn btn-custom btn-success">
+                                <i class="fas fa-download"></i> Descargar PDF
+                            </a>
+                            <a th:href="@{/reportes/usuarios?tipo=Xls}" class="btn btn-custom btn-warning">
+                                <i class="fas fa-download"></i> Descargar Excel
+                            </a>
+                            <a th:href="@{/reportes/usuarios?tipo=Csv}" class="btn btn-custom btn-danger">
+                                <i class="fas fa-download"></i> Descargar CSV
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Repite el mismo formato para los otros reportes -->
+               <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <h4 class="mb-0">Reporte de Ventas</h4>
+                        </div>
+                        <div class="card-body text-center">
+                            <a th:href="@{/reportes/ventas?tipo=vPdf}" class="btn btn-custom btn-dark">
+                                <i class="fas fa-eye"></i> Ver PDF
+                            </a>
+                            <a th:href="@{/reportes/ventas?tipo=Pdf}" class="btn btn-custom btn-success">
+                                <i class="fas fa-download"></i> Descargar PDF
+                            </a>
+                            <a th:href="@{/reportes/ventas?tipo=Xls}" class="btn btn-custom btn-warning">
+                                <i class="fas fa-download"></i> Descargar Excel
+                            </a>
+                            <a th:href="@{/reportes/ventas?tipo=Csv}" class="btn btn-custom btn-danger">
+                                <i class="fas fa-download"></i> Descargar CSV
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <h4 class="mb-0">Reporte de Facturas</h4>
+                        </div>
+                        <div class="card-body text-center">
+                            <a th:href="@{/reportes/facturas?tipo=vPdf}" class="btn btn-custom btn-dark">
+                                <i class="fas fa-eye"></i> Ver PDF
+                            </a>
+                            <a th:href="@{/reportes/facturas?tipo=Pdf}" class="btn btn-custom btn-success">
+                                <i class="fas fa-download"></i> Descargar PDF
+                            </a>
+                            <a th:href="@{/reportes/facturas?tipo=Xls}" class="btn btn-custom btn-warning">
+                                <i class="fas fa-download"></i> Descargar Excel
+                            </a>
+                            <a th:href="@{/reportes/facturas?tipo=Csv}" class="btn btn-custom btn-danger">
+                                <i class="fas fa-download"></i> Descargar CSV
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <h4 class="mb-0">Reporte de Cantidad de Productos</h4>
+                        </div>
+                        <div class="card-body text-center">
+                            <a th:href="@{/reportes/cantidadproductos?tipo=vPdf}" class="btn btn-custom btn-dark">
+                                <i class="fas fa-eye"></i> Ver PDF
+                            </a>
+                            <a th:href="@{/reportes/cantidadproductos?tipo=Pdf}" class="btn btn-custom btn-success">
+                                <i class="fas fa-download"></i> Descargar PDF
+                            </a>
+                            <a th:href="@{/reportes/cantidadproductos?tipo=Xls}" class="btn btn-custom btn-warning">
+                                <i class="fas fa-download"></i> Descargar Excel
+                            </a>
+                            <a th:href="@{/reportes/cantidadproductos?tipo=Csv}" class="btn btn-custom btn-danger">
+                                <i class="fas fa-download"></i> Descargar CSV
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <h4 class="mb-0">Reporte de Fac</h4>
+                        </div>
+                        <div class="card-body">
+                            <form method="GET" th:action="@{/reportes/ventasTotales}" class="was-validated">
+                                <div class="form-group">
+                                    <label for="fechaInicio">Fecha Inicio</label>
+                                    <input type="date" class="form-control" name="fechaInicio" th:value="${fechaInicio}" required="true"/>
+                                </div>                                
+                                <div class="form-group">
+                                    <label for="fechaFin">Fecha Fin</label>
+                                    <input type="date" class="form-control" name="fechaFin" th:value="${fechaFin}" required="true"/>
+                                </div>
+                                <div class="text-center">
+                                    <button name="tipo" value="vPdf" type="submit" class="btn btn-custom btn-dark">
+                                        <i class="fas fa-eye"></i> Ver PDF
+                                    </button>
+                                    <button name="tipo" value="Pdf" type="submit" class="btn btn-custom btn-success">
+                                        <i class="fas fa-download"></i> Descargar PDF
+                                    </button>
+                                    <button name="tipo" value="Xls" type="submit" class="btn btn-custom btn-warning">
+                                        <i class="fas fa-download"></i> Descargar Excel
+                                    </button>
+                                    <button name="tipo" value="Csv" type="submit" class="btn btn-custom btn-danger">
+                                        <i class="fas fa-download"></i> Descargar CSV
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="~{layout/plantilla :: footer}" />
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Agrega aquí cualquier script JavaScript adicional -->
+    </body>
+</html>

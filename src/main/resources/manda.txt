@@ -1,0 +1,86 @@
+<section id="main-header" class="py-2 bg-white text-dark">
+            <div class="container">
+                <div class="row">
+                    <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+
+                    </nav>
+                    <div class="col-md-6">
+                        <a href="BebesCatalogo.html" class="btn btn-white">Bebes</a>
+                        <a href="HombresCatalogo.html" class="btn btn-white">Hombres</a>
+                        <a href="MujeresCatalogo.html" class="btn btn-white">Mujeres</a>
+                        <a href="PerfumesCatalogo.html" class="btn btn-white">Perfumes</a>
+                        <div style="text-align: center; position: relative;">
+                            <img id="mainImage" src="https://img2.wallspic.com/crops/1/8/6/3/33681/33681-tejer_cap-1920x1080.jpg" alt="Bebes" width="3500" style="max-width: 200%; margin-bottom: 20px;" />
+
+                            <div style="position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%);">
+                                <!-- Flecha izquierda -->
+                                <button type="button" class="btn btn-secondary" style="position: absolute; top: 50%; left: 0; transform: translateY(-50%);" onclick="changeImage('prev')">&#8249;</button>
+                            </div>
+
+                            <div style="position: absolute; top: 50%; right: -100%; transform: translate(50%, -50%);">
+                                <!-- Flecha derecha -->
+                                <button type="button" class="btn btn-secondary" style="position: absolute; top: 50%; right: -100%; transform: translateY(-50%);" onclick="changeImage('next')">&#8250;</button>
+                            </div>
+
+                            <div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);">
+                                <!-- Botón de categoría "Bebes" -->
+                                <a href="BebesCatalogo.html">
+                                    <button type="button" class="btn btn-primary">Bebes</button>
+                                </a>
+                            </div>
+                        </div>
+
+                        <script>
+                            const images = [
+                                "https://img2.wallspic.com/crops/1/8/6/3/33681/33681-tejer_cap-1920x1080.jpg",
+                                "https://c.wallhere.com/photos/09/d1/G_Eazy_rap_musician_monochrome_men-1213785.jpg!d",
+                                "https://c.wallhere.com/photos/e8/88/Emma_Watson_monochrome_actress_women_model-244653.jpg!d",
+                                "https://hips.hearstapps.com/hmg-prod/images/disen-o-sin-ti-tulo-1671697996.png"
+                                // En esta parque se pueden agregar mas imagenes a ruleta 
+                                       
+                            ];
+
+                            let currentImageIndex = 0;
+                            const mainImage = document.getElementById("mainImage");
+
+                            function changeImage(direction) {
+                                if (direction === 'prev') {
+                                    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                                } else if (direction === 'next') {
+                                    currentImageIndex = (currentImageIndex + 1) % images.length;
+                                }
+                                mainImage.src = images[currentImageIndex];
+                            }
+
+                            function autoChangeImage() {
+                                changeImage('next');
+                            }
+
+                            // Cambia la imagen automáticamente cada 5 segundos (5000 ms)
+                            setInterval(autoChangeImage, 5000);
+                        </script>
+                        <div style="display: flex; justify-content: center; flex-direction: column; align-items: center; margin-top: 20px;">
+                            <div style="text-align: center; position: relative;">
+                                <img src="https://www.stopcambioclimatico.es/wp-content/uploads/2019/06/scc-2.jpg" alt="Ropa" width="350"/>
+                                <a href="RopaCatalogo.html">
+                                    <button type="button" class="btn btn-primary" style="position: absolute; top: 80%; left: 50%; transform: translate(-50%, -50%); padding: 10px 20px; cursor: pointer;">Ropa</button>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <h4>Nosotros somos una tienda de Costa Rica Belén con una mercadería de clase alta, 
+                    excelentes precios, un servicio web que brinda una atención al cliente increíble
+                    y un servicio excelente.
+                </h4>
+                <h5>Chayfer - Comercio especializado en venta de Ropa, Calzado y Perfumería.</h5>
+                <h5>Numero Telefónico: 85052144 - 24384207</h5>
+                <article style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15717.811536989273!2d-84.1863633!3d9.9793978!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0f97de5380b77%3A0xf35f64623381bc39!2sChayfer%20S.A!5e0!3m2!1ses-419!2scr!4v1689918402232!5m2!1ses-419!2scr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </article>
+            </div>
+        </section>
+
+    </body>
