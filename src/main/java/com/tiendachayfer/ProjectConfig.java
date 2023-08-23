@@ -62,6 +62,8 @@ public class ProjectConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/sobre").setViewName("sobre");
+        registry.addViewController("/pruebas").setViewName("pruebas");
         registry.addViewController("/registro/nuevo").setViewName("/registro/nuevo");
     }
 
@@ -71,7 +73,10 @@ public class ProjectConfig implements WebMvcConfigurer {
                 .authorizeHttpRequests((request) -> request
                 .requestMatchers("/", "/index", "/errores/**",
                         "/carrito/**",
-                        "/registro/**", "/js/**", "/webjars/**")
+                        "/registro/**", "/js/**", "/webjars/**",
+                        "/sobre/**",
+                        "/pruebas/**"
+                )
                 .permitAll()
                 .requestMatchers(
                         "/producto/nuevo", "/producto/guardar",
@@ -85,7 +90,7 @@ public class ProjectConfig implements WebMvcConfigurer {
                 .requestMatchers(
                         "/producto/listado",
                         "/categoria/listado",
-                        "/usuario/listado"
+                       "/usuario/listado"
                 ).hasAnyRole("ADMIN", "VENDEDOR")
                 .requestMatchers("/facturar/carrito")
                 .hasRole("USER")

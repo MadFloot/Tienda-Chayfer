@@ -7,13 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.tiendachayfer.dao.ProductoDao;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
 
-    //La anotacion Autowired crea un unico objeto sin hacer new... y se mantiene
     @Autowired
     private ProductoDao productoDao;
+
+    @PersistenceContext
+    private EntityManager entityManager; // Inyecta el EntityManager
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> getProductosByEsParaBebe(boolean esParaBebe) {
+        String jpql = "SELECT p FROM Producto p WHERE p.esParaBebe = :esParaBebe";
+        TypedQuery<Producto> query = entityManager.createQuery(jpql, Producto.class);
+        query.setParameter("esParaBebe", esParaBebe);
+        return query.getResultList();
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -62,5 +76,7 @@ public class ProductoServiceImpl implements ProductoService {
     public List<Producto> metodoNativo(double precioInf, double precioSup) {
         return productoDao.metodoNativo(precioInf, precioSup);
     }
+
+   
 
 }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+
+      <head th:replace="~{layout/plantilla :: head}">
+        <title>TechShop</title>
+    </head>
+    <body>
+        <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
+        <section th:fragment="categoriaTabs" class="py-4 mb-4 bg-light">
+
+        </section>
+
+
+        <!-- 2 Sección principal para mostrar la informaccion de la entidad producto -->
+        <section th:fragment="listadoProductos" id="productos">
+            <div class="container">
+                <div class="row row-cols-2" >
+                    <h2 class="inline">
+                        ÚLTIMOS PRECIOS | REBAJAS | HASTA -50% </h2>
+                    <div id="resultsBlock">                        
+                    </div>                        
+                </div>
+                <div class="container">
+                    <div class="row row-cols-5 justify-content-center" th:if="${productos != null and !productos.empty}">
+                        <div class="card align-items-stretch" th:each="producto : ${productos}" style="border: 2px solid black; margin: 10px; width: 25rem; height: 10%;">
+                            <div class="card-body text-center"> <!-- Agregar la clase text-center aquí -->
+
+                                <h5 class="card-title">[[${producto.descripcion}]]</h5>
+                                <figure>
+                                    <img th:src="@{${producto.rutaImagen}}" height="200"/>
+                                    <figcaption>[[${producto.precio}+' ('+${producto.existencias}+')']]
+                                    </figcaption>
+                                </figure>
+                                <p class="card-text">[[${producto.detalle}]]</p> 
+
+                                <form>
+                                    <input type="hidden" name="texto" th:value="${producto.idProducto}"/>
+                                    <input type="hidden" name="texto" th:value="${producto.existencias}"/>
+                                    <button class="btn btn-dark btn-sm" id="addCar" 
+                                            name="addCar" onclick="addCard(this.form)" 
+                                            type="button">
+                                        <i class="fas fa-cart-plus"></i> Añadir al carrito
+                                    </button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div th:if="${productos == null or productos.empty}">
+                    [[#{carrito.no_mostrar}]]
+                </div>
+            </div>
+        </section>
+
+
+    </body>
+</html>

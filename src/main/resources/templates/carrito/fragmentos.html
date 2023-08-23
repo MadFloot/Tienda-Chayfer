@@ -3,24 +3,20 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>TechShop</title>
+        <title>Chayfer</title>
+
     </head>
     <body>
 
 
         <!-- 1 Sección principal para mostrar la informaccion de los productos en el index -->
-        <section th:fragment="listadoProductos" id="productos"
-                 <div class="container">
+        <section th:fragment="listadoProductos" id="productos">
+            <div class="container">
                 <div class="row row-cols-2" >
-                    <h2 class="inline">[[#{index.nuestrasCategorias}]]</h2>
+                    <h2 class="inline"></h2>
                     <div id="resultsBlock">                        
                     </div> 
                     <div class="col-md-6">
-                       
-                        <a th:href="@{/bebe/listado}" class="btn btn-white">Bebes</a>
-                        <a href="HombresCatalogo.html" class="btn btn-white">Hombres</a>
-                        <a href="MujeresCatalogo.html" class="btn btn-white">Mujeres</a>
-                        <a href="PerfumesCatalogo.html" class="btn btn-white">Perfumes</a>
                         <div style="text-align: center; position: relative;">
                             <img id="mainImage" src="https://img2.wallspic.com/crops/1/8/6/3/33681/33681-tejer_cap-1920x1080.jpg" alt="Bebes" width="3500" style="max-width: 200%; margin-bottom: 20px;" />
 
@@ -46,10 +42,8 @@
                                         // En esta parque se pueden agregar mas imagenes a ruleta 
 
                             ];
-
                             let currentImageIndex = 0;
                             const mainImage = document.getElementById("mainImage");
-
                             function changeImage(direction) {
                                 if (direction === 'prev') {
                                     currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
@@ -76,41 +70,57 @@
 
                 </div>
 
-
-                <link href="../../static/css/carrito index.css" rel="stylesheet" type="text/css"/>
+                <div class="row row-cols-2" >
+                    <h2 class="inline">
+                        ÚLTIMOS PRECIOS | REBAJAS | HASTA -50% </h2>
+                    <div id="resultsBlock">                        
+                    </div>                        
+                </div>
                 <div class="container">
-                    <div class="row row-cols-3" th:if="${productos != null and !productos.empty}">
-                        <div class="card" th:each="producto : ${productos}">
-                            <div class="card-body text-center">
+                    <div class="row row-cols-5 justify-content-center" th:if="${productos != null and !productos.empty}">
+                        <div class="card align-items-stretch" th:each="producto : ${productos}" style="border: 2px solid black; margin: 10px; width: 25rem; height: 100%;">
+                            <div class="card-body text-center"> 
+
                                 <h5 class="card-title">[[${producto.descripcion}]]</h5>
                                 <figure>
                                     <img th:src="@{${producto.rutaImagen}}" height="200"/>
-                                    <figcaption>[[${producto.precio} + ' (' + ${producto.existencias} + ')']]</figcaption>
+                                    <figcaption>[[${producto.precio}+' ('+${producto.existencias}+')']]
+                                    </figcaption>
                                 </figure>
+                                <p class="card-text">[[${producto.detalle}]]</p> 
+
                                 <form>
                                     <input type="hidden" name="texto" th:value="${producto.idProducto}"/>
                                     <input type="hidden" name="texto" th:value="${producto.existencias}"/>
-                                    <button class="btn btn-light" id="addCar" name="addCar" onclick="addCard(this.form)" type="button">
-                                        <i class="fas fa-cart-plus"></i>
+                                    <button class="btn btn-dark btn-sm" id="addCar" 
+                                            name="addCar" onclick="addCard(this.form)" 
+                                            type="button">
+                                        <i class="fas fa-cart-plus"></i> Añadir al carrito
                                     </button>
                                 </form>
-                                <p class="card-text">[[${producto.detalle}]]</p>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
+
                 <div th:if="${productos == null or productos.empty}">
                     [[#{carrito.no_mostrar}]]
                 </div>
             </div>
         </section>
 
+
+
         <!-- Este fragmento es el que hace que se ver el boton de "ver Carrito" cuando ya hay algo en el carrito de Compras -->
         <div th:fragment="verCarrito" th:unless="${#lists.isEmpty(listaItems)}">            
             <form action="/carrito/listado">
                 <button
                     type="submit"
-                    class="btn btn-primary">
+                    class="btn btn-dark">
                     <i class="fas fa-cart-plus"></i>
                     [[#{carrito.verCarrito}]] [[${listaTotal}]]
                 </button>
@@ -155,7 +165,7 @@
                                             </td>
                                             <td>
                                                 <a th:href="@{/carrito/modificar/}+${item.idProducto}"
-                                                   class="btn btn-success">
+                                                   class="btn btn-dark">
                                                     <i class='fas fa-pencil'></i> [[#{accion.actualizar}]]
                                                 </a>
                                             </td>
@@ -177,10 +187,10 @@
                                 </h4>
                             </div>
                         </div>
-                        <div class="card text-center bg-success text-white mb-3">
+                        <div class="card text-center bg-dark text-white mb-3">
                             <div class="card-body">
                                 <a th:href="@{/}"
-                                   class="btn btn-success">
+                                   class="btn btn-dark">
                                     <i class='fas fa-reply'></i> [[#{carrito.seguirComprando}]]
                                 </a>
                             </div>
@@ -198,41 +208,7 @@
             </div>
         </section>
 
-        <!-- 4 Sección para ver productos de la categoría "Bebés" -->
-        <section th:fragment="productosBebes">
-            <div class="container">
-                <div class="row row-cols-2">
-                    <h2 class="inline">[[#{index.productosBebes}]]</h2>
-                    <div id="resultsBlockBebes"></div>
-                </div>
-                <div class="row row-cols-3"
-                     th:if="${productosBebes != null and !productosBebes.empty}">
-                    <div class="card" th:each="producto : ${productosBebes}">
-                        <div class="card-body">
-                            <h5 class="card-title">[[${producto.descripcion}]]</h5>
-                            <figure>
-                                <img th:src="@{${producto.rutaImagen}}" height="200"/>
-                                <figcaption>[[${producto.precio}+' ('+${producto.existencias}+')']]
-                                </figcaption>
-                            </figure>
-                            <form>
-                                <input type="hidden" name="texto" th:value="${producto.idProducto}"/>
-                                <input type="hidden" name="texto" th:value="${producto.existencias}"/>
-                                <button class="btn btn-ligth" id="addCarBebes"
-                                        name="addCarBebes" onclick="addCard(this.form)"
-                                        type="button">
-                                    <i class="fas fa-cart-plus"></i>
-                                </button>
-                            </form>
-                            <p class="card-text">[[${producto.detalle}]]</p>
-                        </div>
-                    </div>
-                </div>
-                <div th:if="${productosBebes == null or productosBebes.empty}">
-                    [[#{carrito.no_mostrar}]]
-                </div>
-            </div>
-        </section>
+
     </body>
 </html>
 
