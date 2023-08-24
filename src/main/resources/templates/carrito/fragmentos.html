@@ -71,20 +71,19 @@
                 </div>
 
                 <div class="row row-cols-2" >
-                    <h2 class="inline">
-                        ÚLTIMOS PRECIOS | REBAJAS | HASTA -50% </h2>
+                    <h2 class="inline">[[#{subtitulo}]]</h2>
                     <div id="resultsBlock">                        
                     </div>                        
                 </div>
                 <div class="container">
                     <div class="row row-cols-5 justify-content-center" th:if="${productos != null and !productos.empty}">
-                        <div class="card align-items-stretch" th:each="producto : ${productos}" style="border: 2px solid black; margin: 10px; width: 25rem; height: 100%;">
+                        <!-- Loop through the first 9 productos -->
+                        <div class="card align-items-stretch" th:each="producto, iterStat : ${productos}" th:if="${iterStat.index} lt 9" style="border: 2px solid black; margin: 10px; width: 25rem; height: 100%;">
                             <div class="card-body text-center"> 
-
                                 <h5 class="card-title">[[${producto.descripcion}]]</h5>
                                 <figure>
                                     <img th:src="@{${producto.rutaImagen}}" height="200"/>
-                                    <figcaption>[[${producto.precio}+' ('+${producto.existencias}+')']]
+                                    <figcaption>Precio: ₡[[${producto.precio}+' | Disponibles: ('+${producto.existencias}+')']]
                                     </figcaption>
                                 </figure>
                                 <p class="card-text">[[${producto.detalle}]]</p> 
@@ -95,14 +94,14 @@
                                     <button class="btn btn-dark btn-sm" id="addCar" 
                                             name="addCar" onclick="addCard(this.form)" 
                                             type="button">
-                                        <i class="fas fa-cart-plus"></i> Añadir al carrito
+                                        <i class="fas fa-cart-plus"></i> [[#{añadir.carrito}]]
                                     </button>
                                 </form>
-
                             </div>
                         </div>
                     </div>
                 </div>
+
 
 
 
@@ -179,7 +178,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card text-center bg-primary text-white mb-3">
+                        <div class="card text-center bg-dark text-white mb-3">
                             <div class="card-body">
                                 <h3>[[#{carrito.totalCompra}]]</h3>
                                 <h4 class="fs-4">
@@ -195,10 +194,10 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="card text-center bg-info text-white mb-3">
+                        <div class="card text-center bg-dark text-white mb-3">
                             <div class="card-body">
                                 <a th:href="@{/facturar/carrito}"
-                                   class="btn btn-info">
+                                   class="btn btn-dark">
                                     <i class='fas fa-fordward'></i> [[#{carrito.facturar}]]
                                 </a>
                             </div>
@@ -211,89 +210,3 @@
 
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 1 Sección principal para mostrar la informaccion de los productos en el index 
-        <section th:fragment="listadoProductos" id="productos"
-                 <div class="container">
-                <div class="row row-cols-2" >
-                    <h2 class="inline">[[#{index.nuestrosProductos}]]</h2>
-                    <div id="resultsBlock">                        
-                    </div>                        
-                </div>
-
-                <div class="col-md-6">
-                    <a href="bebes.html" class="btn btn-white">Bebes</a>
-                    <a href="HombresCatalogo.html" class="btn btn-white">Hombres</a>
-                    <a href="MujeresCatalogo.html" class="btn btn-white">Mujeres</a>
-                    <a href="PerfumesCatalogo.html" class="btn btn-white">Perfumes</a>
-                    <div style="text-align: center; position: relative;">
-                        <img id="mainImage" src="https://img2.wallspic.com/crops/1/8/6/3/33681/33681-tejer_cap-1920x1080.jpg" alt="Bebes" width="3500" style="max-width: 200%; margin-bottom: 20px;" />
-
-                        <div style="position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%);">
-<!-- Flecha izquierda 
-<button type="button" class="btn btn-secondary" style="position: absolute; top: 50%; left: 0; transform: translateY(-50%);" onclick="changeImage('prev')">&#8249;</button>
-</div>
-
-<div style="position: absolute; top: 50%; right: -100%; transform: translate(50%, -50%);">
-<!-- Flecha derecha 
-<button type="button" class="btn btn-secondary" style="position: absolute; top: 50%; right: -100%; transform: translateY(-50%);" onclick="changeImage('next')">&#8250;</button>
-</div>
-
-
-</div>
-
-<script>
-const images = [
-"https://img2.wallspic.com/crops/1/8/6/3/33681/33681-tejer_cap-1920x1080.jpg",
-"https://c.wallhere.com/photos/09/d1/G_Eazy_rap_musician_monochrome_men-1213785.jpg!d",
-"https://c.wallhere.com/photos/e8/88/Emma_Watson_monochrome_actress_women_model-244653.jpg!d",
-"https://hips.hearstapps.com/hmg-prod/images/disen-o-sin-ti-tulo-1671697996.png"
-        // En esta parque se pueden agregar mas imagenes a ruleta 
-
-];
-
-let currentImageIndex = 0;
-const mainImage = document.getElementById("mainImage");
-
-function changeImage(direction) {
-if (direction === 'prev') {
-    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-} else if (direction === 'next') {
-    currentImageIndex = (currentImageIndex + 1) % images.length;
-}
-mainImage.src = images[currentImageIndex];
-}
-
-function autoChangeImage() {
-changeImage('next');
-}
-
-// Cambia la imagen automáticamente cada 5 segundos (5000 ms)
-setInterval(autoChangeImage, 5000);
-</script> 
-
-
-
-<div th:if="${productos == null or productos.empty}">
-[[#{carrito.no_mostrar}]]
-</div>
-</div>
-</section>-->
-
-
-<!-- 1 Sección principal para mostrar la informaccion de los productos en el index -->
