@@ -24,6 +24,27 @@
                 </div>
             </div>
         </section>
+        
+        
+         <section th:fragment="categoriaTabs" class="py-2 bg-white text-dark">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 text-center">
+                            <div class="text-center">
+                                <h1>[[#{plantilla.bienvenidos}]]</h1>
+                                <a class="btn btn-outline-dark" th:href="@{/pruebas/listado}">Todos nuestros productos</a>
+                            </div>
+                            <div class="text-center mt-2">
+                                <ul class="nav nav-tabs justify-content-center">
+                                    <li class="nav-item mb-2" th:each="categoria : ${categorias}">
+                                        <a class="btn btn-outline-dark mb-2" th:href="@{/pruebas/listado/}+${categoria.idCategoria}" th:text="${categoria.descripcion}"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
         <!-- 2 Fragmento para agregar producto, es la ventana modal -->
         <section th:fragment="agregarProducto">

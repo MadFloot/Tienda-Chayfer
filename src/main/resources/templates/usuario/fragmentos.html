@@ -112,7 +112,7 @@
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
                                                 <a th:href="@{/usuario/modificar/}+${usuario.idUsuario}"
-                                                   class="btn btn-success">
+                                                   class="btn btn-dark">
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a></td></tr>
                                     </tbody>
                                 </table>
@@ -198,7 +198,7 @@
             <div class="container py-4 mb-4 bg-light">
                 <div class="row">
                     <div class="col-md-4 d-grid">
-                        <a th:href="@{/usuario/listado}" class="btn btn-primary">
+                        <a th:href="@{/usuario/listado}" class="btn btn-dark">
                             <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
                         </a>
                     </div>
@@ -209,7 +209,7 @@
                         </a>
                     </div>
                     <div class="col-md-4 d-grid" sec:authorize="hasRole('ROLE_ADMIN')">
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-dark">
                             <i class="fas fa-check"></i> [[#{accion.guardar}]]
                         </button>
                     </div>

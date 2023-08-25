@@ -63,6 +63,7 @@ public class ProjectConfig implements WebMvcConfigurer {
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/sobre").setViewName("sobre");
+              registry.addViewController("/ubicanos").setViewName("ubicanos");
         registry.addViewController("/pruebas").setViewName("pruebas");
         registry.addViewController("/registro/nuevo").setViewName("/registro/nuevo");
     }
@@ -75,6 +76,7 @@ public class ProjectConfig implements WebMvcConfigurer {
                         "/carrito/**",
                         "/registro/**", "/js/**", "/webjars/**",
                         "/sobre/**",
+                         "/ubicanos/**",
                         "/pruebas/**"
                 )
                 .permitAll()

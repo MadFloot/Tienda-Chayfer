@@ -12,7 +12,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <a th:href="@{/carrito/listado}" class="btn btn-dark">
-                        <i class="fas fa-shopping-cart me-2"></i> Ver carrito de Compras
+                        <i class="fas fa-shopping-cart me-2"></i> [[#{vercarrito}]]
                     </a>
                 </div>
             </div>
@@ -46,8 +46,8 @@
                                            class="form-control" min="1" th:max="${item.existencias}"/>
                                 </div>
                                 <div class="d-grid gap-2">
-                                    <button class="btn btn-success" type="submit" name="guardar">
-                                        <i class='fas fa-save me-2'></i>Añadir al carrito o Actualizar
+                                    <button class="btn btn-dark" type="submit" name="guardar">
+                                        <i class='fas fa-save me-2'></i>[[#{añadir}]]
                                     </button>
                                     <a th:href="@{/carrito/eliminar/}+${item.idProducto}" class="btn btn-danger">
                                         <i class='fas fa-trash me-2'></i> [[#{accion.eliminar}]]
